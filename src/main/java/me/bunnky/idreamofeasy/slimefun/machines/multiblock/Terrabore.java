@@ -44,6 +44,7 @@ public class Terrabore extends IndustrialMiner {
 
         return b.getType().getHardness() >= 0 &&
             b.getType().isSolid() &&
+            MaterialUtility.toItemMaterial(b.getType()) != null &&
             !BlockStorage.hasBlockInfo(b);
     }
 }

@@ -77,7 +77,30 @@ public class MaterialUtility {
     }
 
     public static DropInfo getDropInfo(Material material) {
-        return DROP_MAP.getOrDefault(material, new DropInfo(material, 1, 1));
+        DropInfo info = DROP_MAP.get(material);
+        if (info != null) {
+            return info;
+        }
+        Material item = toItemMaterial(material);
+        return new DropInfo(item != null ? item : material, 1, 1);
+    }
+
+    /**
+     * Material de ítem equivalente a un bloque. Algunos bloques no tienen ítem propio
+     * (carteles, antorchas y cabezas de pared...) y {@code new ItemStack(...)} lanza
+     * IllegalArgumentException con ellos, lo que detiene la minera. Devuelve null si
+     * el bloque no tiene ningún ítem equivalente.
+     */
+    public static Material toItemMaterial(Material material) {
+        if (material.isItem()) {
+            return material;
+        }
+        try {
+            Material placement = material.createBlockData().getPlacementMaterial();
+            return placement.isItem() && !placement.isAir() ? placement : null;
+        } catch (IllegalArgumentException | UnsupportedOperationException e) {
+            return null;
+        }
     }
 }
 

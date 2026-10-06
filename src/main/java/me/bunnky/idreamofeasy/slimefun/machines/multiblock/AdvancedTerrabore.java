@@ -11,6 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import me.bunnky.idreamofeasy.utils.MaterialUtility;
 import me.bunnky.idreamofeasy.utils.MundosPermitidos;
 /*
 Description: The Advanced Terrabore is a variant of the Terrabore. It works in an 11x11 radius and mines everything but ores. Requires lava, oil, or fuel.
@@ -29,7 +30,8 @@ public class AdvancedTerrabore extends IndustrialMiner {
 
     @Override
     public @NotNull ItemStack getOutcome(@NotNull Material material) {
-        return new ItemStack(material);
+        Material item = MaterialUtility.toItemMaterial(material);
+        return new ItemStack(item != null ? item : material);
     }
 
     @Override
@@ -52,6 +54,7 @@ public class AdvancedTerrabore extends IndustrialMiner {
             b.getType() != Material.ANCIENT_DEBRIS &&
             b.getType().getHardness() >= 0 &&
             b.getType().isSolid() &&
+            MaterialUtility.toItemMaterial(b.getType()) != null &&
             !BlockStorage.hasBlockInfo(b);
     }
 }

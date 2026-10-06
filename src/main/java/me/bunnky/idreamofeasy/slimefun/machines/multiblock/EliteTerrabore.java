@@ -10,6 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import me.bunnky.idreamofeasy.utils.MaterialUtility;
 import me.bunnky.idreamofeasy.utils.MundosPermitidos;
 /*
 Description: The Elite Terrabore is a variant of the Terrabore. It works in a 21x21 radius and mines everything. Requires uranium as a fuel source
@@ -29,7 +30,8 @@ public class EliteTerrabore extends IndustrialMiner {
 
     @Override
     public @NotNull ItemStack getOutcome(@NotNull Material material) {
-        return new ItemStack(material);
+        Material item = MaterialUtility.toItemMaterial(material);
+        return new ItemStack(item != null ? item : material);
     }
 
     @Override
@@ -50,6 +52,7 @@ public class EliteTerrabore extends IndustrialMiner {
 
         return b.getType().getHardness() >= 0 &&
             b.getType().isSolid() &&
+            MaterialUtility.toItemMaterial(b.getType()) != null &&
             !BlockStorage.hasBlockInfo(b);
     }
 }
