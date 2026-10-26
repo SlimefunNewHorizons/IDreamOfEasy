@@ -1,6 +1,6 @@
 package me.bunnky.idreamofeasy.listeners;
 
-import com.github.drakescraft_labs.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import me.bunnky.idreamofeasy.IDreamOfEasy;
 import me.bunnky.idreamofeasy.slimefun.items.idols.TerranIdol;
 import me.bunnky.idreamofeasy.slimefun.items.idols.Idol;
