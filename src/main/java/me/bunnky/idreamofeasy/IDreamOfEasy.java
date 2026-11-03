@@ -16,7 +16,7 @@ public class IDreamOfEasy extends JavaPlugin implements SlimefunAddon {
     private final String repo;
 
     public IDreamOfEasy() {
-        this.username = "DrakesCraft-Labs";
+        this.username = "SlimefunNewHorizons";
         this.repo = "IDreamOfEasy";
     }
 
