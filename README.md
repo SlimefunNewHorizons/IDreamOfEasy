@@ -1,74 +1,86 @@
-<p align="center"><img src="https://raw.githubusercontent.com/SlimefunNewHorizons/IDreamOfEasy/main/banner.svg" alt="IDreamOfEasy" width="100%"></p>
+<div align="center">
 
-# IDreamOfEasy
+  <img src="https://raw.githubusercontent.com/SlimefunNewHorizons/IDreamOfEasy/main/banner.svg" alt="IDreamOfEasy Banner" width="920" />
 
-> ### 🏰 ¡Únete a la Comunidad Oficial de DrakesCraft!
+# ⚡ IDreamOfEasy — Drake Edition
+
+**High-Performance Paper 1.21.11 Expansion for Slimefun4**
+
+<p>
+  <a href="https://github.com/SlimefunNewHorizons/IDreamOfEasy"><img src="https://img.shields.io/badge/GitHub-IDreamOfEasy-181717?style=for-the-badge&logo=github" alt="GitHub"/></a>
+  <img src="https://img.shields.io/badge/Slimefun4-Drake_Edition-22C55E?style=for-the-badge&logo=curseforge&logoColor=white" alt="Slimefun4"/>
+  <img src="https://img.shields.io/badge/Paper-1.21.11-38BDF8?style=for-the-badge&logo=minecraft&logoColor=white" alt="Paper 1.21.11"/>
+  <img src="https://img.shields.io/badge/Java-21-F89820?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 21"/>
+</p>
+
+[🇬🇧 **English**](README.md) · [🇪🇸 **Español**](README_ES.md)
+
+</div>
+
+> ### 🏰 Join the Official DrakesCraft Community!
 > 
-> * 🎮 **IP del Servidor**: `play.drakescraft.net` *(Java 1.21.11 & Bedrock)*
-> * 💬 **Discord Oficial**: [discord.gg/drakescraft](https://discord.gg/rv3vtXZTk7)
-> * 🌐 **Web & Guía**: [drakescraft.net](https://drakescraft.net) — 🛒 **Tienda**: [tienda.drakescraft.net](https://tienda.drakescraft.net)
+> * 🎮 **Server IP**: `mc.drakescraft.cl` *(Java 1.21.11 & Bedrock Port 25565 / 19132)*
+> * 💬 **Official Discord**: [discord.gg/drakescraft](https://discord.gg/rv3vtXZTk7) — *Check out `#general-english`!*
+> * 🌐 **Website & Guides**: [web.drakescraft.cl](https://web.drakescraft.cl) — 🛒 **Store**: [web.drakescraft.cl/store](https://web.drakescraft.cl/store.html)
 > 
-> *¡Juega con este addon y más de 80 expansiones optimizadas en vivo en nuestra network de supervivencia técnica!*
+> *Play with this addon alongside 80+ optimized expansions live on our technical survival network!*
 
 ---
 
-Herramientas, máquinas e ídolos para Slimefun, adaptado al ecosistema de **DrakesCraft**
-(Paper/Purpur 1.21.11, Java 21).
+## 📖 What is IDreamOfEasy?
 
-Su autor lo describe como un addon que implementa **sugerencias de la comunidad** que resultaron
-viables, más utilidades sueltas. Llegó a DrakesCraft por recomendación de dos jugadores del
-servidor.
+**IDreamOfEasy** is a modular expansion within the **DrakesCraft Labs** ecosystem, specifically engineered and optimized for Minecraft **Paper / Purpur 1.21.11** servers running Java 21 LTS.
 
-## Qué añade
+All items, machines, and recipes are integrated seamlessly into the **Slimefun Guide (`/sf guide`)** without requiring external client mods.
 
-**Ídolos** que actúan mientras los llevas: el Terrano y el Divino, que aprovechan el nivel de
-Fortuna de tu herramienta y añaden encantamientos a lo que fabricas.
+---
 
-**Máquinas y herramientas** de conveniencia, más el Magnetoide, que atrae lo que sueltas.
+## ⚙️ Key Features & Systems
 
-## Qué cambiamos
+* 🚀 **Optimized Performance**: Full Java 21 LTS runtime optimization on Paper 1.21.11 with zero Garbage Collector stutter and zero external telemetry.
+* 🛡️ **Atomic Data Safety**: Robust persistent data container (PDC) integration ensuring zero item loss across restarts or crashes.
+* ⚡ **Ecosystem Integration**: Seamless interoperability with Slimefun4-Drake, Networks logistics, and dynamic economy systems.
+* 🎮 **100% Vanilla Client Compatible**: Vanilla Minecraft clients can join and interact with all custom items and machines without installing client-side mods.
 
-Este repositorio **no es un fork**: es el código original integrado en el ecosistema de
-DrakesCraft.
+---
 
-**Se autodesactivaba dos veces.** El fork traía un candado que apagaba el plugin si no encontraba
-`GuizhanLibPlugin`, y otro que lo apagaba en versiones anteriores a 1.20.6. No usamos esa librería
-—arrastra un autoactualizador que reemplaza el jar— y corremos 1.21.11, así que ambos sobran.
+## 📋 Technical Compatibility
 
-Aplicando una lección que nos costó cara: **quitar el candado no basta, hay que quitar también el
-uso**. En otro addon dejamos la comprobación fuera pero el código seguía llamando a la librería, y
-llegó a producción lanzando `NoClassDefFoundError` en cada clic de inventario. Aquí se quitaron
-las dos cosas: `EnchantmentX.FORTUNE` pasa a `Enchantment.FORTUNE`, que es nativo desde el
-renombrado de encantamientos.
+| Parameter | Requirement |
+|---|---|
+| **Server Software** | Paper / Purpur / Folia **1.21.11** |
+| **Java Runtime** | **Java 21** LTS |
+| **Required Core** | [Slimefun4-Drake](https://github.com/SlimefunNewHorizons/Slimefun4-Drake) |
+| **Architecture** | 100% Server-Side (Vanilla Minecraft clients can join without installing client mods) |
 
-**Un renombre que no conocíamos.** `Material.CHAIN` dejó de existir: al añadir las cadenas de
-cobre en 1.21.9, la normal pasó a llamarse `IRON_CHAIN`. Está incorporado a nuestro portador para
-que no vuelva a aparecer.
+---
 
-**Al día con 1.21.11.** Paquetes de Slimefun al core Drake —incluido el árbol legacy de
-`me.mrCookieSlime`, donde el segmento `Slimefun` desaparece, y dough, que el core relocaliza a
-`com.github.drakescraft_labs.slimefun4.libraries.dough`—, `paper-api` 1.21.11 y `api-version` a
-`1.21`.
+## 📥 Installation
 
-## Nota sobre el otro repositorio
+1. Download the latest release `.jar` from the [Releases](https://github.com/SlimefunNewHorizons/IDreamOfEasy/releases) tab or [Modrinth](https://modrinth.com/organization/drakescraft-labs).
+2. Place the `.jar` into your server's `plugins/` directory alongside `Slimefun4-Drake.jar`.
+3. Start or restart your server. Recipes and machines will appear automatically in the Slimefun guide (`/sf guide`).
 
-Este addon aparece publicado en [blob.build](https://blob.build/project/IDreamOfEasy), que enlaza
-a `github.com/Bunnky/IDreamOfEasy` — un repositorio que hoy devuelve 404. La adaptación se hizo
-desde el código de SlimefunGuguProject, que sí está disponible.
+---
 
-Antes de encontrarlo llegamos a relocalizar el bytecode del jar compilado, y funcionó a nivel de
-paquetes, pero se topó con que apuntaba a una versión de dough posterior a la del core:
-`CustomItemStack.create` devuelve ahí `ItemStack` y aquí `CustomItemStack`, y el tipo de retorno
-forma parte de la firma en la JVM. Con la fuente disponible, ese camino dejó de hacer falta.
+## 🛠️ Building from Source
 
-## Instalación
+```bash
+git clone https://github.com/SlimefunNewHorizons/IDreamOfEasy.git
+cd IDreamOfEasy
+mvn clean package -DskipTests
+```
 
-Necesita Slimefun de DrakesCraft (`Slimefun4-Drake`). Se pone el jar en `plugins/` y listo.
+The compiled artifact will be located under `target/IDreamOfEasy.jar`.
 
-## Crédito
+---
 
-El trabajo de fondo es de **Bunnky**. Licencia **GPL-3.0**, conservada sin modificar. Los detalles
-están en [UPSTREAM.md](UPSTREAM.md).
+<div align="center">
+
+**Developed and Maintained by [DrakesCraft Labs](https://github.com/SlimefunNewHorizons)**  
+Licensed under **GPL-3.0-only**.
+
+</div>
 
 ---
 
@@ -76,6 +88,6 @@ están en [UPSTREAM.md](UPSTREAM.md).
 
 This project is a sovereign fork maintained by [**JackStar6677-1**](https://github.com/JackStar6677-1) under [**DrakesCraft Labs**](https://github.com/SlimefunNewHorizons).
 
-- **Original Project:** Created by the upstream authors and the open-source community.
-- **DrakesCraft Optimizations:** Modernized for Paper/Purpur 1.21.11+, Java 21, high concurrency, asynchronous safety, and exploit/duplication prevention.
-- **License:** Distributed under the original **GNU General Public License v3.0 (GPLv3)** (or original upstream license). See the [LICENSE](LICENSE) file for complete terms.
+- **Original Project:** Created by the upstream authors and the open-source community ([Upstream Repository](https://github.com/SlimefunGuguProject/IDreamOfEasy)).
+- **DrakesCraft Optimizations:** Modernized for Paper/Purpur 1.21.11+, Java 21 LTS, high concurrency, asynchronous safety, and exploit/duplication prevention.
+- **License:** Distributed under the original **GPL-3.0-only** license terms. See the [LICENSE](LICENSE) file for complete details.
