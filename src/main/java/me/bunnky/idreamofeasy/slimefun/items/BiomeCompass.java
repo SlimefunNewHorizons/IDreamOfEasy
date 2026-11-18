@@ -83,22 +83,33 @@ public class BiomeCompass extends SimpleSlimefunItem<ItemUseHandler> {
             return;
         }
 
-        Location closestBiomeLocation = findClosestBiome(p, p.getLocation(), biomes[selectedBiomeIndex]);
-        if (closestBiomeLocation != null) {
-            p.setCompassTarget(closestBiomeLocation);
-            double distance = p.getLocation().distance(closestBiomeLocation);
-            p.sendMessage("§a¡Encontrado " + ChatColor.GREEN + biomes[selectedBiomeIndex].name() + "§a a una distancia de " + ChatColor.GOLD + (int) distance + " §abloques!");
-            Map<Biome, Location> playerDiscovered = playerDiscoveredBiomes.computeIfAbsent(uuid, k -> new ConcurrentHashMap<>());
-            playerDiscovered.put(biomes[selectedBiomeIndex], closestBiomeLocation);
-            p.setCooldown(Material.COMPASS, COOLDOWN_TICKS);
-            p.playSound(p, Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 0.5F, 2F);
-        } else {
-            p.sendMessage("§cNo se detectó ningún " + ChatColor.DARK_RED + biomes[selectedBiomeIndex].name() + " §cen un radio de " + r.getValue() + " bloques.");
-            p.setCooldown(Material.COMPASS, 40); // 2s en fallo
-            p.playSound(p, Sound.BLOCK_ANVIL_LAND, SoundCategory.PLAYERS, 0.4F, 1F);
-        }
+        final int targetBiomeIndex = selectedBiomeIndex;
+        final Biome targetBiome = biomes[targetBiomeIndex];
+        final Location playerLoc = p.getLocation();
+        p.setCooldown(Material.COMPASS, 40); // Cooldown inicial de espera
+        p.sendMessage("§eBuscando " + ChatColor.GOLD + targetBiome.name() + "§e en los alrededores...");
+        p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 0.5F, 1.2F);
 
-        p.spawnParticle(Particle.EFFECT, p.getLocation().add(0, 1.0, 0), 25, 0.3, 0.3, 0.3, 0.05);
+        org.bukkit.Bukkit.getScheduler().runTaskAsynchronously(me.bunnky.idreamofeasy.IDreamOfEasy.getInstance(), () -> {
+            Location closestBiomeLocation = findClosestBiome(p, playerLoc, targetBiome);
+            org.bukkit.Bukkit.getScheduler().runTask(me.bunnky.idreamofeasy.IDreamOfEasy.getInstance(), () -> {
+                if (!p.isOnline()) return;
+                if (closestBiomeLocation != null) {
+                    p.setCompassTarget(closestBiomeLocation);
+                    double distance = p.getLocation().distance(closestBiomeLocation);
+                    p.sendMessage("§a¡Encontrado " + ChatColor.GREEN + targetBiome.name() + "§a a una distancia de " + ChatColor.GOLD + (int) distance + " §abloques!");
+                    Map<Biome, Location> playerDiscovered = playerDiscoveredBiomes.computeIfAbsent(uuid, k -> new ConcurrentHashMap<>());
+                    playerDiscovered.put(targetBiome, closestBiomeLocation);
+                    p.setCooldown(Material.COMPASS, COOLDOWN_TICKS);
+                    p.playSound(p, Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 0.5F, 2F);
+                } else {
+                    p.sendMessage("§cNo se detectó ningún " + ChatColor.DARK_RED + targetBiome.name() + " §cen un radio de " + r.getValue() + " bloques.");
+                    p.setCooldown(Material.COMPASS, 40);
+                    p.playSound(p, Sound.BLOCK_ANVIL_LAND, SoundCategory.PLAYERS, 0.4F, 1F);
+                }
+                p.spawnParticle(Particle.EFFECT, p.getLocation().add(0, 1.0, 0), 25, 0.3, 0.3, 0.3, 0.05);
+            });
+        });
     }
 
     private Location findClosestBiome(Player p, Location playerLocation, Biome targetBiome) {
