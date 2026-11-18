@@ -107,7 +107,7 @@ public class BiomeCompass extends SimpleSlimefunItem<ItemUseHandler> {
                     p.setCooldown(Material.COMPASS, 40);
                     p.playSound(p, Sound.BLOCK_ANVIL_LAND, SoundCategory.PLAYERS, 0.4F, 1F);
                 }
-                p.spawnParticle(Particle.EFFECT, p.getLocation().add(0, 1.0, 0), 25, 0.3, 0.3, 0.3, 0.05);
+                p.spawnParticle(Particle.ENCHANT, p.getLocation().add(0, 1.0, 0), 25, 0.3, 0.3, 0.3, 0.05);
             });
         });
     }
