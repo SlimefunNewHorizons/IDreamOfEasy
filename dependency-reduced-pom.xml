@@ -86,7 +86,7 @@
     <dependency>
       <groupId>com.github.drakescraft_labs</groupId>
       <artifactId>slimefun-core</artifactId>
-      <version>11.0-Drake-1.21.11-SNAPSHOT</version>
+      <version>11.0-Universal-26.x-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -117,8 +117,8 @@
     </dependency>
   </dependencies>
   <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.target>21</maven.compiler.target>
     <maven.compiler.source>21</maven.compiler.source>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 </project>
