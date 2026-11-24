@@ -2,3 +2,5 @@ target/
 build/
 *.jar
 .idea/
+dependency-reduced-pom.xml
+.gradle/
